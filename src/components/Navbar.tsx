@@ -1,8 +1,10 @@
 import React from 'react';
 import {Navbar as NavBs, Container,Nav,Button} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
+import {useShoppingProvider} from '../context/ShoppingCart';
 
 const Navbar=()=>{
+   const {openCart,cartQuantity}=useShoppingProvider();
    return (
       <NavBs sticky='top' className='bg-white shadow-sm mb-3'>
          <Container>
@@ -21,6 +23,7 @@ const Navbar=()=>{
                style={{width:'3rem',height:"3rem",position:"relative"}}
                variant="outline-primary"
                className="rounded-circle"
+               onClick={openCart}
             >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -41,7 +44,7 @@ const Navbar=()=>{
                   transform:"translate(25%,25%)"
                }}
             >
-               3
+               {cartQuantity}
             </div>
             </Button>
          </Container>

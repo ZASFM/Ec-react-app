@@ -12,7 +12,7 @@ type StoreItemProps={
 
 const StoreItem=({id,name,price,imgUrl}:StoreItemProps)=>{
    const {getItemQuantity,increaseItemQuantity,decreaseItemQuantity,removeFromCart}=useShoppingProvider();
-   const quantity=1;
+   const quantity=getItemQuantity(id);
    return (
       <Card className="h-100">
          <Card.Img variant="top" src={imgUrl} height="200px" style={{objectFit:"cover"}}/>
@@ -24,14 +24,14 @@ const StoreItem=({id,name,price,imgUrl}:StoreItemProps)=>{
             <div className="mt-auto">
                {
                   quantity===0?
-                  <Button className="w-100">+ Add</Button>:
+                  <Button className="w-100" onClick={()=>increaseItemQuantity(id)}>+ Add</Button>:
                   <div className="d-flex align-items-center flex-column" style={{gap:"0.5rem"}}>
                      <div className="d-flex align-items-center justify-content-center" style={{gap:"0.5rem"}}>
-                        <Button>+</Button>
+                        <Button onClick={()=>increaseItemQuantity(id)}>+</Button>
                         <div className="fs-3">{quantity} <span>in cart</span></div>
-                        <Button>-</Button>
+                        <Button onClick={()=>decreaseItemQuantity(id)}>-</Button>
                      </div>
-                     <Button variant="danger">Remove</Button>
+                     <Button variant="danger" onClick={()=>removeFromCart(id)}>Remove</Button>
                   </div>
                }
             </div>
